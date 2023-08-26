@@ -1,0 +1,42 @@
+import random
+
+# Create a Log In Form Using IF Else
+
+# Taking Inputs from User
+Candidate_Name = input("Enter Your Full Name:\t ")
+Candidate_Age = int(input("Enter Your Age:\t "))
+Candidate_Email = input("Enter Your Email Address:\t ")
+Candidate_Contact = input("Enter Your Contact Number:\t ")
+Candidate_Consent = input("I Accept the Terms and Conditions (yes/no):\t ").lower()  # Modified input prompt
+RegID = random.randint(1500, 5000)
+
+# Currently, We are considering OTP to be inputted manually
+OTP = 171441  # Removed int() as the OTP is hardcoded
+
+# Generating If Else Conditions
+if len(Candidate_Name) >= 6:
+    if Candidate_Age > 21 and Candidate_Age <= 70:
+        if "@" in Candidate_Email and "." in Candidate_Email:
+            if len(Candidate_Contact) == 11:
+                if Candidate_Consent == "yes":
+                    print(f"""Dear {Candidate_Name}! An OTP Code has been sent to your {Candidate_Email} and {Candidate_Contact} please verify it in order to continue.""")
+                    OneTimePassword = int(input("Enter One Time Password Sent: "))
+                    # When OTP Is Sent to the Email or Contact of User
+                    if OneTimePassword == OTP:
+                        print(f"You Have Successfully Registered! Your Registration ID is: {RegID}.")
+                    else:
+                        print("User Authentication Failed!")
+                elif Candidate_Consent == "no":
+                    print(f"Dear {Candidate_Name}! You Must Agree to Terms and Conditions in order to Continue")
+                else:
+                    print("Please select Either from \"Yes\" or \"No\"")
+            else:
+                print("Invalid Contact Provided. The contact must be of 11 Digits")
+        else:
+            print("Invalid Email Provided!")
+    else:
+        print("Authentication Failed! You Must be 21 or above in order to continue.")
+elif len(Candidate_Name) > 20 or len(Candidate_Name) < 6:
+    print("Username Authentication Failed!")
+else:
+    print("Registration Failed! Please try again to continue")
